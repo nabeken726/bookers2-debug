@@ -11,7 +11,7 @@ before_action :ensure_correct_user, only: [:update, :edit]
   def index
     @book = Book.new
     @books = Book.all
-  
+
   end
 
   def create
@@ -21,6 +21,7 @@ before_action :ensure_correct_user, only: [:update, :edit]
       redirect_to book_path(@book), notice: "You have created book successfully."
     else
       @books = Book.all
+      @user = current_user
       render 'index'
     end
   end
@@ -39,7 +40,8 @@ before_action :ensure_correct_user, only: [:update, :edit]
   end
 
   def destroy
-    @book = Book.find(params[:id])
+    
+    
     @book.destroy
     redirect_to books_path
   end

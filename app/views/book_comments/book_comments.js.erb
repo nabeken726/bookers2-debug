@@ -1,0 +1,6 @@
+<!--idで指定しているところを部分テンプレート更新-->
+$("#comments_area").html("<%= j(render 'book_comments/book_form', book: @book, book_comment: @book_comment ) %>");
+<!--フォーム送信後空にする-->
+$("text_area").val('');
+
+
