@@ -4,17 +4,17 @@ def create
 
   @book = Book.find(params[:book_id])
   @book_comment = BookComment.new
-  comment = current_user.book_comments.new(book_comment_params)
-  comment.book_id = @book.id
-  comment.save
+  @comment = current_user.book_comments.new(book_comment_params)
+  @comment.book_id = @book.id
+  @comment.save
   render :create
 end
 
 def destroy
   @book = Book.find(params[:book_id])
-  @book_comment = current_user.book_comments.find_by(book_id: @book.id)
+  @book_comment = @book.book_comments.find(params[:id])
   @book_comment.destroy
-  render :destroy
+
 end
 
 

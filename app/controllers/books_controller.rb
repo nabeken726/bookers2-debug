@@ -9,9 +9,13 @@ before_action :ensure_correct_user, only: [:update, :edit]
   end
 
   def index
+    to = Time.current.at_end_of_day
+    from = (to - 6.day).at_beginning_of_day
+    @books = Book.includes(:favorited_users).
+      sort_by {|x|
+        x.favorited_users.includes(:favorites).where(created_at: from...to).size
+      }
     @book = Book.new
-    @books = Book.all
-
   end
 
   def create
@@ -40,8 +44,8 @@ before_action :ensure_correct_user, only: [:update, :edit]
   end
 
   def destroy
-    
-    
+
+
     @book.destroy
     redirect_to books_path
   end
