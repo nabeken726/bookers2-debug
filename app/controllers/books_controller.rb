@@ -6,6 +6,10 @@ before_action :ensure_correct_user, only: [:update, :edit]
     @user = User.find(@book.user.id)
     @newbook = Book.new
     @book_comment = BookComment.new
+    @book_detail = Book.find(params[:id])
+    unless ViewCount.find_by(user_id: current_user.id, book_id: @book_detail.id)
+      current_user.view_counts.create(book_id: @book_detail.id)
+    end
   end
 
   def index
@@ -17,6 +21,7 @@ before_action :ensure_correct_user, only: [:update, :edit]
     }
     @book = Book.new
     @book = Book.new
+    
   end
 
   def create
@@ -29,6 +34,7 @@ before_action :ensure_correct_user, only: [:update, :edit]
       @user = current_user
       render 'index'
     end
+  
   end
 
   def edit

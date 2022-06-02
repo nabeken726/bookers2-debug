@@ -20,6 +20,7 @@
           <td><%= @book.body %></td>
           <td id="favorite_buttons_<%= @book.id %>"><%= render 'favorites/good_button', book: @book %></td>
           <td><p>コメント数：<%= @book.book_comments.count %></p></td>
+          <td><p class="view-count">閲覧数:<%= @book_detail.view_counts.count %></p></td>
            <% if @book.user == current_user %>
             <td><%= link_to 'Edit', edit_book_path(@book), class: "btn btn-sm btn-success edit_book_#{@book.id}" %></td>
             <td><%= link_to 'Destroy', @book, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger destroy_book_#{@book.id}"%></td>
