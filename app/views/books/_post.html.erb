@@ -1,0 +1,42 @@
+<!--投稿用カウントのテンプレート-->
+<div class="table_width">
+<table class="table table-bordered">
+<tr>
+  <td>今日の投稿数</td>
+  <td>前日の投稿数</td>
+  <td>前日比</td>
+</tr>
+
+<tr>
+  <td><%= @today_book.count %></td>
+  <td><%= @yesterday_book.count %></td>
+  <td><% if @yesterday_book.count == 0 %>
+        0
+       <% else %>
+       　<% @the_day_before =   @today_book.count / @yesterday_book.count.to_f  %>
+       　<%= (@the_day_before * 100).round %>
+       　%
+       <% end %>
+  </td>
+</tr>
+
+<tr>
+  <td>今週の投稿数</td>
+  <td>前週の投稿数</td>
+  <td>前週比</td>
+</tr>
+
+<tr>
+  <td><%= @this_week_book.count %></td>
+  <td><%= @last_week_book.count %></td>
+  <td><% if @last_week_book.count == 0 %>
+     0
+     <% else %>
+      <% @the_week_before =   @this_week_book.count / @last_week_book.count.to_f  %>
+       <%= (@the_week_before * 100).round %>
+       %
+     <% end %>
+     </td>
+</tr>
+</table>
+</div>

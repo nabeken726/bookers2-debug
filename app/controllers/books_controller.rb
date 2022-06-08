@@ -1,6 +1,11 @@
 class BooksController < ApplicationController
 before_action :authenticate_user!
 before_action :ensure_correct_user, only: [:update, :edit]
+
+
+
+
+
   def show
     @book = Book.find(params[:id])
     @user = User.find(@book.user.id)
@@ -15,13 +20,13 @@ before_action :ensure_correct_user, only: [:update, :edit]
   def index
     to  = Time.current.at_end_of_day
     from  = (to - 6.day).at_beginning_of_day
-    @books = Book.all.sort {|a,b| 
-      b.favorites.where(created_at: from...to).size <=> 
+    @books = Book.all.sort {|a,b|
+      b.favorites.where(created_at: from...to).size <=>
       a.favorites.where(created_at: from...to).size
     }
     @book = Book.new
-    @book = Book.new
-    
+
+
   end
 
   def create
@@ -34,7 +39,7 @@ before_action :ensure_correct_user, only: [:update, :edit]
       @user = current_user
       render 'index'
     end
-  
+
   end
 
   def edit
