@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   resources :book_comments, only: [:create, :destroy]
   end
   resources :users, only: [:index,:show,:edit,:update] do
-    get 'search', to: 'users#search'
+    get "daily_posts" => "users#daily_posts"
   end
 # フォローをネストさせる
   resources :users do
